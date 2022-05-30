@@ -98,7 +98,6 @@ export class TableView extends DOMWidgetView {
       });
   }
 
-
   auto_size_columns() {
     const $table = $('table');
     const $headCells = $table.find('thead tr').children();
