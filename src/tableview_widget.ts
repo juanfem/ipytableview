@@ -105,7 +105,7 @@ export class TableView extends DOMWidgetView {
 
     // Get the thead columns width array
     const headColWidth = $headCells
-      .map(() => {
+      .map(function () {
         return $(this).width();
       })
       .get();
