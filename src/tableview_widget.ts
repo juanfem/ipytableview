@@ -1,7 +1,7 @@
 // Copyright (c) {{ cookiecutter.author_name }}
 // Distributed under the terms of the Modified BSD License.
 
-import $ from "jquery";
+import $ from 'jquery';
 
 import {
   DOMWidgetModel,
@@ -49,7 +49,6 @@ export class TableView extends DOMWidgetView {
   render() {
     this.el.classList.add('tableview-widget');
 
-    // this.value_changed();
     this.makeTable(this.model.get('headers'));
 
     this.model.on('change:table_body', this.table_body_changed, this);
@@ -57,14 +56,13 @@ export class TableView extends DOMWidgetView {
   }
 
   table_body_changed() {
-    var table_body_list = this.model.get('table_body');
+    const table_body_list = this.model.get('table_body');
     this.table_body.empty();
-    // this.table_body = $("<tbody/>");
-    for (var i in table_body_list) {
-      var row = $("<tr/>");
+    for (const i in table_body_list) {
+      const row = $('<tr/>');
       this.table_body.append(row);
-      for (var j in table_body_list[i]) {
-        var col = $("<td/>").text(table_body_list[i][j]);
+      for (const j in table_body_list[i]) {
+        const col = $('<td/>').text(table_body_list[i][j]);
         row.append(col);
       }
     }
@@ -74,72 +72,86 @@ export class TableView extends DOMWidgetView {
   }
 
   set_selected_row() {
-    var index = this.model.get('selected');
-    if (index == -1) {
-      $('table').find('tbody tr').each(function (i, tr) {
-        $(tr).removeClass('selected');
-      })
+    const index = this.model.get('selected');
+    if (index === -1) {
+      $('table')
+        .find('tbody tr')
+        .each((_i, tr) => {
+          $(tr).removeClass('selected');
+        });
     } else {
-      var tr = $('table').find('tbody tr')[index];
+      const tr = $('table').find('tbody tr')[index];
       $(tr).addClass('selected').siblings().removeClass('selected');
     }
   }
 
   set_onclick_handler() {
-    var model = this.model;
-    $('table').find('tbody tr').each(function (idx, tr) {
-      tr.onclick = function () {
-        model.set('selected', idx);
-        model.save_changes();
-        $(tr).addClass('selected').siblings().removeClass('selected');
-      };
-    });
+    const model = this.model;
+    $('table')
+      .find('tbody tr')
+      .each((idx, tr) => {
+        tr.onclick = function () {
+          model.set('selected', idx);
+          model.save_changes();
+          $(tr).addClass('selected').siblings().removeClass('selected');
+        };
+      });
   }
 
 
   auto_size_columns() {
-    var $table = $('table');
-    var $headCells = $table.find('thead tr').children();
-    var $bodyCells = $table.find('tbody tr:first').children();
+    const $table = $('table');
+    const $headCells = $table.find('thead tr').children();
+    const $bodyCells = $table.find('tbody tr:first').children();
 
     // Get the thead columns width array
-    var headColWidth = $headCells.map(function () {
-      return $(this).width();
-    }).get();
+    const headColWidth = $headCells
+      .map(() => {
+        return $(this).width();
+      })
+      .get();
 
     // Get the tbody columns width array
-    var bodyColWidth = $bodyCells.map(function () {
-      return $(this).width();
-    }).get();
+    const bodyColWidth = $bodyCells
+      .map(function () {
+        return $(this).width();
+      })
+      .get();
 
     // Get max between thead and tbody widths
-    var colWidth: number[] = [];
-    for (var index in headColWidth) {
+    const colWidth: number[] = [];
+    for (const index in headColWidth) {
       colWidth[index] = Math.max(headColWidth[index], bodyColWidth[index]);
     }
 
     // Set the width of thead columns
-    $table.find('tbody tr').children().each(function (i, v) {
-      $(v).width(colWidth[i]);
-    });
-    $table.find('thead tr').children().each(function (i, v) {
-      $(v).width(colWidth[i]);
-    });
+    $table
+      .find('tbody tr')
+      .children()
+      .each((i, v) => {
+        $(v).width(colWidth[i]);
+      });
+    $table
+      .find('thead tr')
+      .children()
+      .each((i, v) => {
+        $(v).width(colWidth[i]);
+      });
   }
 
   makeTable(headers: string[]) {
-    var table = $("<table/>").addClass('tb');
-    var header = $("<thead/>");
+    const table = $('<table/>').addClass('tb');
+    const header = $('<thead/>');
     table.append(header);
-    var row = $("<tr/>");
+    const row = $('<tr/>');
     header.append(row);
 
-    for (var index in headers) {
-      var col = $("<th/>").text(headers[index]);
+    for (const index in headers) {
+      const col = $('<th/>').text(headers[index]);
       row.append(col);
     }
 
-    this.table_body = $("<tbody/>");
+    this.table_body = $('<tbody/>');
     table.append(this.table_body);
 
     return this._setElement(table[0]);
