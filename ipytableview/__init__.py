@@ -4,6 +4,7 @@
 # Copyright (c) Juan F. Esteban Müller.
 # Distributed under the terms of the Modified BSD License.
 
+
 def _jupyter_labextension_paths():
     """Called by Jupyter Lab Server to detect if it is a valid labextension and
     to install the widget
@@ -16,7 +17,12 @@ def _jupyter_labextension_paths():
         from `src` directory into <jupyter path>/labextensions/<dest> directory
         during widget installation
     """
-    return [{"src": "labextension", "dest": "ipytableview", }]
+    return [
+        {
+            "src": "labextension",
+            "dest": "ipytableview",
+        }
+    ]
 
 
 def _jupyter_nbextension_paths():

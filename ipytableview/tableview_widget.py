@@ -15,8 +15,7 @@ from ._frontend import module_name, module_version
 
 @register
 class TableViewWidget(DOMWidget, ValueWidget):
-    """TODO: Add docstring here
-    """
+    """TODO: Add docstring here"""
 
     _model_name = Unicode("TableModel").tag(sync=True)
     _model_module = Unicode(module_name).tag(sync=True)
