@@ -4,8 +4,6 @@
 # Copyright (c) Juan F. Esteban Müller.
 # Distributed under the terms of the Modified BSD License.
 
-import pytest
-
 from ..tableview_widget import TableViewWidget
 
 

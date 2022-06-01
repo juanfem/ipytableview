@@ -17,106 +17,92 @@ from jupyter_packaging import (
     ensure_targets,
     combine_commands,
     get_version,
-    skip_if_exists
+    skip_if_exists,
 )
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 
 
-
-
 # The name of the project
-name = 'ipytableview'
+name = "ipytableview"
 
 # Get the version
-version = get_version(pjoin(name, '_version.py'))
+version = get_version(pjoin(name, "_version.py"))
 
 
 # Representative files that should exist after a successful build
 jstargets = [
-    pjoin(HERE, name, 'nbextension', 'index.js'),
-    pjoin(HERE, name, 'labextension', 'package.json'),
+    pjoin(HERE, name, "nbextension", "index.js"),
+    pjoin(HERE, name, "labextension", "package.json"),
 ]
 
 
-package_data_spec = {
-    name: [
-        'nbextension/**js*',
-        'labextension/**'
-    ]
-}
+package_data_spec = {name: ["nbextension/**js*", "labextension/**"]}
 
 
 data_files_spec = [
-    ('share/jupyter/nbextensions/ipytableview', 'ipytableview/nbextension', '**'),
-    ('share/jupyter/labextensions/ipytableview', 'ipytableview/labextension', '**'),
-    ('share/jupyter/labextensions/ipytableview', '.', 'install.json'),
-    ('etc/jupyter/nbconfig/notebook.d', '.', 'ipytableview.json'),
+    ("share/jupyter/nbextensions/ipytableview", "ipytableview/nbextension", "**"),
+    ("share/jupyter/labextensions/ipytableview", "ipytableview/labextension", "**"),
+    ("share/jupyter/labextensions/ipytableview", ".", "install.json"),
+    ("etc/jupyter/nbconfig/notebook.d", ".", "ipytableview.json"),
 ]
 
 
-cmdclass = create_cmdclass('jsdeps', package_data_spec=package_data_spec,
-    data_files_spec=data_files_spec)
-npm_install = combine_commands(
-    install_npm(HERE, build_cmd='build:prod'),
-    ensure_targets(jstargets),
+cmdclass = create_cmdclass(
+    "jsdeps", package_data_spec=package_data_spec, data_files_spec=data_files_spec
 )
-cmdclass['jsdeps'] = skip_if_exists(jstargets, npm_install)
+npm_install = combine_commands(
+    install_npm(HERE, build_cmd="build:prod"), ensure_targets(jstargets),
+)
+cmdclass["jsdeps"] = skip_if_exists(jstargets, npm_install)
 
 
 setup_args = dict(
-    name            = name,
-    description     = 'Table view widget',
-    version         = version,
-    scripts         = glob(pjoin('scripts', '*')),
-    cmdclass        = cmdclass,
-    packages        = find_packages(),
-    author          = 'Juan F. Esteban Müller',
-    author_email    = 'gnu.anfe@gmail.com',
-    url             = 'https://github.com//ipytableview',
-    license         = 'BSD',
-    platforms       = "Linux, Mac OS X, Windows",
-    keywords        = ['Jupyter', 'Widgets', 'IPython'],
-    classifiers     = [
-        'Intended Audience :: Developers',
-        'Intended Audience :: Science/Research',
-        'License :: OSI Approved :: BSD License',
-        'Programming Language :: Python',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6',
-        'Programming Language :: Python :: 3.7',
-        'Framework :: Jupyter',
+    name=name,
+    description="Table view widget",
+    version=version,
+    scripts=glob(pjoin("scripts", "*")),
+    cmdclass=cmdclass,
+    packages=find_packages(),
+    author="Juan F. Esteban Müller",
+    author_email="gnu.anfe@gmail.com",
+    url="https://github.com//ipytableview",
+    license="BSD",
+    platforms="Linux, Mac OS X, Windows",
+    keywords=["Jupyter", "Widgets", "IPython"],
+    classifiers=[
+        "Intended Audience :: Developers",
+        "Intended Audience :: Science/Research",
+        "License :: OSI Approved :: BSD License",
+        "Programming Language :: Python",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.4",
+        "Programming Language :: Python :: 3.5",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
+        "Framework :: Jupyter",
     ],
-    include_package_data = True,
+    include_package_data=True,
     python_requires=">=3.6",
-    install_requires = [
-        'ipywidgets>=7.0.0',
-    ],
-    extras_require = {
-        'test': [
-            'pytest>=4.6',
-            'pytest-cov',
-            'nbval',
-        ],
-        'examples': [
+    install_requires=["ipywidgets>=7.0.0", ],
+    extras_require={
+        "test": ["pytest>=4.6", "pytest-cov", "nbval", ],
+        "examples": [
             # Any requirements for the examples to run
         ],
-        'docs': [
-            'jupyter_sphinx',
-            'nbsphinx',
-            'nbsphinx-link',
-            'pytest_check_links',
-            'pypandoc',
-            'recommonmark',
-            'sphinx>=1.5',
-            'sphinx_rtd_theme',
+        "docs": [
+            "jupyter_sphinx",
+            "nbsphinx",
+            "nbsphinx-link",
+            "pytest_check_links",
+            "pypandoc",
+            "recommonmark",
+            "sphinx>=1.5",
+            "sphinx_rtd_theme",
         ],
     },
-    entry_points = {
-    },
+    entry_points={},
 )
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     setup(**setup_args)

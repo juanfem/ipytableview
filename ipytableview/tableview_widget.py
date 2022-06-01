@@ -17,10 +17,11 @@ from ._frontend import module_name, module_version
 class TableViewWidget(DOMWidget, ValueWidget):
     """TODO: Add docstring here
     """
-    _model_name = Unicode('TableModel').tag(sync=True)
+
+    _model_name = Unicode("TableModel").tag(sync=True)
     _model_module = Unicode(module_name).tag(sync=True)
     _model_module_version = Unicode(module_version).tag(sync=True)
-    _view_name = Unicode('TableView').tag(sync=True)
+    _view_name = Unicode("TableView").tag(sync=True)
     _view_module = Unicode(module_name).tag(sync=True)
     _view_module_version = Unicode(module_version).tag(sync=True)
 
@@ -31,5 +32,5 @@ class TableViewWidget(DOMWidget, ValueWidget):
     def __init__(self, headers=None, *args):
         if headers is not None:
             self.headers = headers
-        
+
         super().__init__(*args)
