@@ -3,4 +3,4 @@
 # W503 is incompatible with PEP 8
 # E203 whitespace before ':'
 ignore = E501,W503,E203
-
+per-file-ignores = __init__.py:F401

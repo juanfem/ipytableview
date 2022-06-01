@@ -1,5 +1,5 @@
 {
-  "name": "ipytableview",
+  "name": "tableviewwidget",
   "version": "0.1.0",
   "description": "Table view widget",
   "keywords": [
@@ -13,9 +13,9 @@
     "dist/*.js",
     "css/*.css"
   ],
-  "homepage": "https://github.com//ipytableview",
+  "homepage": "https://github.com/ipytableview",
   "bugs": {
-    "url": "https://github.com//ipytableview/issues"
+    "url": "https://github.com/ipytableview/issues"
   },
   "license": "BSD-3-Clause",
   "author": {
@@ -26,7 +26,7 @@
   "types": "./lib/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com//ipytableview"
+    "url": "https://github.com/ipytableview"
   },
   "scripts": {
     "build": "yarn run build:lib && yarn run build:nbextension && yarn run build:labextension:dev",
